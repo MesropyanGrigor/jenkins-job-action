@@ -42,6 +42,7 @@ def queue_job(crumb, jenkins_url, job_name, jenkins_params, jenkins_user, jenkin
         query_string = '?' + '&'.join([str(param)+"="+str(params[param]) for param in params])
     job_queue_url = f"{jenkins_url}/job/{job_name}/buildWithParameters{query_string}"
     queue_response = get_request_response(job_queue_url, jenkins_user, jenkins_token, parse_json=False, params={ 'token': jenkins_token }, headers={'Jenkins-Crumb': crumb})
+    print(job_queue_url, jenkins_user, jenkins_token, parse_json=False, params={ 'token': jenkins_token }, headers={'Jenkins-Crumb': crumb})
     queue_item_location = queue_response.headers["Location"]
     return queue_item_location
 
